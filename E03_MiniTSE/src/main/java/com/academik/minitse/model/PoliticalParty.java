@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -22,6 +23,8 @@ import javax.persistence.Table;
 public class PoliticalParty implements Serializable {
     
     @Id
+    @SequenceGenerator(name = "seq_political_party", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_political_party")
     @Column(name = "id_partido")
     private Long id;
     

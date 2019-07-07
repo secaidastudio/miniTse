@@ -8,26 +8,25 @@
     <ui:composition template="templates/main.xhtml">
         
         <ui:define name="content">
-            <h1>Todos los votantes</h1>
+            <h1>Todos los partidos</h1>
             <h:form>
-                <h:dataTable class="table" value="#{listVotersBean.voters}" var="v">
+                <h:dataTable class="table" value="#{listPoliticalPartiesBean.allParties}" var="p">
+                    
                     <h:column>
-                        <f:facet name="header">DPI</f:facet>
-                        <h:outputText value="#{v.dpi}"/>
+                        <f:facet name="header">Nombre del partido</f:facet>
+                        <h:outputText value="#{p.name}"/>
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Nombres</f:facet>
-                        <h:outputText value="#{v.firstName}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Apellidos</f:facet>
-                        <h:outputText value="#{v.lastName}"/>
+                        <f:facet name="header">Nombre del candidato</f:facet>
+                        <h:outputText value="#{p.candidate}"/>
                     </h:column>
                 </h:dataTable>
+                <!--Boton para la ir a la creacion de partido politico -->
                 <h:commandLink 
-                    value="Registrar nuevo votante" 
+                    value="Registrar nuevo partido" 
                     class="btn btn-primary"
-                    action="register">                       
+                    action="registerPP">
+                    
                 </h:commandLink>
             </h:form>        
         </ui:define>
