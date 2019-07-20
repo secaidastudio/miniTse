@@ -32,6 +32,11 @@ public class ListPoliticalPartiesBean implements Serializable{
         return allParties;
     }
     
+    public void delete(Long id){
+        daoPoliticalParty.delete(id);
+        allParties = daoPoliticalParty.findAll();
+    }
+    
     
 
     

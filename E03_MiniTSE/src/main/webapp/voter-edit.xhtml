@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="templates/main.xhtml">
+
+        <ui:define name="title">Editar votante</ui:define>
+
+        <ui:define name="content">
+            <h:form>
+                <div
+                    id="message"
+                    class="alert alert-success alert-dismissible show fade">
+                    <strong>Éxito!</strong> Votante editado correctamente
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <h:panelGrid columns="2" class="table table-borderless">
+
+
+                    <h:outputText value="DPI"/>
+                    <h:inputText value="#{voterEditBean.tempDpi}" class="w-100"/>
+
+
+                    <h:outputText value="Nombres"/>
+                    <h:inputText value="#{voterEditBean.tempFirstName}" class="w-100"/>
+
+
+                    <h:outputText value="Apellidos"/>
+                    <h:inputText value="#{voterEditBean.tempLastName}" class="w-100"/>
+
+                    <h:outputText value="Fecha de nacimiento"/>
+                    <h:inputText value="#{voterEditBean.tempBirthday}" class="w-100">
+                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                    </h:inputText>
+
+                    <h:outputText value="Género:"/>
+                    <h:selectOneMenu value="#{voterEditBean.tempGender}" class="custom-select">
+                        <f:selectItem itemValue="M" itemLabel="Masculino"/>
+                        <f:selectItem itemValue="F" itemLabel="Femenino"/>
+                    </h:selectOneMenu>
+
+                    <h:outputText value="Direccion"/>
+                    <h:inputText value="#{voterEditBean.tempAddress}" class="w-100"/>
+
+                    <h:outputText value="Direccion adicional"/>
+                    <h:inputText value="#{voterEditBean.tempExtraAddress}" class="w-100"/>
+                </h:panelGrid>
+
+                <h:commandButton 
+                    value="Guardar cambios"
+                    class="btn btn-primary"
+                    action="#{voterEditBean.saveChanges}">
+                    <f:ajax execute="@form" render="@form" onevent="showSuccessMessage()"/>
+                </h:commandButton>
+               
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+
+</html>

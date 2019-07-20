@@ -19,19 +19,19 @@ import javax.inject.Inject;
  *
  * @author esvux
  */
-@ManagedBean(name = "registerVotingPlaceBean" )
+@ManagedBean(name = "votingPlaceCreateBean")
 @ViewScoped
-public class RegisterVotingPlaceBean implements Serializable {
-    
+public class VotingPlaceCreateBean implements Serializable {
+
     @Inject
     DepartmentDAO daoDept;
 
     @Inject
     MunicipalityDAO daoMun;
-    
+
     @Inject
     VotingPlaceDAO daoVotingPlace;
-    
+
     private Long selectedDepartmentId;
     private Long selectedMunicipalityId;
     private String tempName;
@@ -39,12 +39,30 @@ public class RegisterVotingPlaceBean implements Serializable {
     private String tempExtraAddress;
     private List<Department> allDepartments;
     private List<Municipality> allMunicipalities;
+    private String tempInitialRange;
+    private String tempFinalRange;
+
+    public String getTempInitialRange() {
+        return tempInitialRange;
+    }
+
+    public void setTempInitialRange(String tempInitialRange) {
+        this.tempInitialRange = tempInitialRange;
+    }
+
+    public String getTempFinalRange() {
+        return tempFinalRange;
+    }
+
+    public void setTempFinalRange(String tempFinalRange) {
+        this.tempFinalRange = tempFinalRange;
+    }
 
     @PostConstruct
     public void init() {
         allDepartments = daoDept.findAll();
     }
-    
+
     public Long getSelectedDepartmentId() {
         return selectedDepartmentId;
     }
@@ -60,7 +78,7 @@ public class RegisterVotingPlaceBean implements Serializable {
     public void setSelectedMunicipalityId(Long selectedMunicipalityId) {
         this.selectedMunicipalityId = selectedMunicipalityId;
     }
-    
+
     public String getTempName() {
         return tempName;
     }
@@ -84,18 +102,18 @@ public class RegisterVotingPlaceBean implements Serializable {
     public void setTempExtraAddress(String tempExtraAddress) {
         this.tempExtraAddress = tempExtraAddress;
     }
-    
+
     public List<Department> getAllDepartments() {
         return allDepartments;
     }
-    
+
     public List<Municipality> getAllMunicipalities() {
         return allMunicipalities;
     }
-    
+
     public final void changeDepartment(final AjaxBehaviorEvent event) {
         //Si la opcion seleccionada en Departamento es null, limpiar el combobox de Municipio
-        if(selectedDepartmentId == null) {
+        if (selectedDepartmentId == null) {
             selectedMunicipalityId = null;
             allMunicipalities = Collections.EMPTY_LIST;
             return;
@@ -105,27 +123,30 @@ public class RegisterVotingPlaceBean implements Serializable {
         dept.setId(selectedDepartmentId);
         allMunicipalities = daoMun.findByDepartment(dept);
     }
-    
-    public String register() {
+
+    public void register() {
         VotingPlace place = new VotingPlace();
         place.setName(tempName);
         place.setAddress(tempAddress);
         place.setExtraAddress(tempExtraAddress);
+        place.setInitialRange(tempInitialRange);
+        place.setFinalRange(tempFinalRange);
         Municipality m = new Municipality(selectedMunicipalityId);
         place.setMunicipality(m);
         daoVotingPlace.create(place);
         clearForm();
-        return "votingplacecreate";
     }
-    
+
     private void clearForm() {
         tempName = null;
         tempAddress = null;
         tempExtraAddress = null;
+        tempInitialRange = null;
+        tempFinalRange = null;
         selectedDepartmentId = null;
         selectedMunicipalityId = null;
         allDepartments = daoDept.findAll();
         allMunicipalities = Collections.EMPTY_LIST;
     }
-   
+
 }

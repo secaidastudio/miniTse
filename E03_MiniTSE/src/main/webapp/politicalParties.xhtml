@@ -10,7 +10,9 @@
         <ui:define name="content">
             <h1>Todos los partidos</h1>
             <h:form>
-                <h:dataTable class="table" value="#{listPoliticalPartiesBean.allParties}" var="p">
+                <h:dataTable class="table" 
+                             value="#{listPoliticalPartiesBean.allParties}" 
+                             var="p">
                     
                     <h:column>
                         <f:facet name="header">Nombre del partido</f:facet>
@@ -20,12 +22,29 @@
                         <f:facet name="header">Nombre del candidato</f:facet>
                         <h:outputText value="#{p.candidate}"/>
                     </h:column>
+                    
+                    <!--Opciones de editar y eliminar-->
+                    <h:column>
+                        <f:facet name="header">Acciones</f:facet>
+                        <h:commandLink
+                            class="btn btn-info"
+                            value="Editar"
+                            action="#{nav.goEditParty(p.id)}">
+                        </h:commandLink>
+                        <span> </span>
+                        <h:commandLink
+                            class="btn btn-danger"
+                            value="Eliminar"
+                            onclick="if(!confirm('¿Desea eliminar este partido politico?')) return false;">
+                            <f:ajax execute="@this" render="@form" listener="#{listPoliticalPartiesBean.delete(p.id)}"/>
+                        </h:commandLink>
+                    </h:column>
                 </h:dataTable>
                 <!--Boton para la ir a la creacion de partido politico -->
                 <h:commandLink 
                     value="Registrar nuevo partido" 
                     class="btn btn-primary"
-                    action="registerPP">
+                    action="#{nav.goCreateParty()}">
                     
                 </h:commandLink>
             </h:form>        

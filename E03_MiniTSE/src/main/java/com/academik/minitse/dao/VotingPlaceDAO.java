@@ -28,4 +28,21 @@ public class VotingPlaceDAO {
         return query.getResultList();
     }
     
+    public VotingPlace findById(Long id) {
+        VotingPlace place = em.find(VotingPlace.class, id);
+        return place;
+    }
+    
+    @Transactional
+    public VotingPlace update(VotingPlace place) {
+        VotingPlace updated = em.merge(place);
+        return updated;
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        VotingPlace placeToDelete = em.find(VotingPlace.class, id);
+        em.remove(placeToDelete);
+    }
+
 }

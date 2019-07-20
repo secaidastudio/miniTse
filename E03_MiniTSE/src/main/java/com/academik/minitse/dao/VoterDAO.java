@@ -34,5 +34,22 @@ public class VoterDAO {
         List<Voter> result = query.getResultList();
         return result;
     }
+
+    public Voter findById(String id) {
+        Voter voter = em.find(Voter.class, id);
+        return voter;
+    }
+
+    @Transactional
+    public Voter update(Voter voter) {
+        Voter updated = em.merge(voter);
+        return updated;
+    }
+
+    @Transactional
+    public void delete(String id) {
+        Voter voterToDelete = em.find(Voter.class, id);
+        em.remove(voterToDelete);
+    }
     
 }

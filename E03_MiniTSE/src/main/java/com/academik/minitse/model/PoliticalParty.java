@@ -34,6 +34,8 @@ public class PoliticalParty implements Serializable {
     @Column(name = "nombre_candidato")
     private String candidate;
     
+    
+    
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "politicalParty")
     private List<Vote> votes;
 

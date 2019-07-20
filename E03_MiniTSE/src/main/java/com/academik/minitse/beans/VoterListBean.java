@@ -11,14 +11,14 @@ import javax.inject.Inject;
  *
  * @author esvux
  */
-@ManagedBean(name = "listVotersBean")
+@ManagedBean(name = "voterListBean")
 @RequestScoped
-public class ListVotersBean {
+public class VoterListBean {
     
     @Inject
     VoterDAO dao;
     
-    List<Voter> voters;
+    private List<Voter> voters;
 
     public List<Voter> getVoters() {
         voters = dao.findAll();
@@ -27,6 +27,11 @@ public class ListVotersBean {
 
     public void setVoters(List<Voter> voters) {
         this.voters = voters;
+    }
+    
+    public void delete(String dpi){
+        dao.delete(dpi);
+        voters = dao.findAll();
     }
     
 }

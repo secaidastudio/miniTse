@@ -32,4 +32,20 @@ public class PoliticalPartyDAO {
         return result;
     }
     
+    @Transactional
+    public PoliticalParty update(PoliticalParty party){
+        PoliticalParty updated = em.merge(party);
+        return updated;
+    }
+    
+    @Transactional
+    public void delete(Long id){
+        PoliticalParty partyToDelete = em.find(PoliticalParty.class, id);
+        em.remove(partyToDelete);
+    }
+
+    public PoliticalParty findById(Long id) {
+        PoliticalParty party = em.find(PoliticalParty.class, id);
+        return party;
+    }
 }

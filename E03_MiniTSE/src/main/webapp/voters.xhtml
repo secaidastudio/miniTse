@@ -8,9 +8,12 @@
     <ui:composition template="templates/main.xhtml">
         
         <ui:define name="content">
-            <h1>Todos los votantes</h1>
             <h:form>
-                <h:dataTable class="table" value="#{listVotersBean.voters}" var="v">
+                <h:dataTable 
+                    id="voters"
+                    class="table" 
+                    value="#{voterListBean.voters}" 
+                    var="v">
                     <h:column>
                         <f:facet name="header">DPI</f:facet>
                         <h:outputText value="#{v.dpi}"/>
@@ -23,12 +26,28 @@
                         <f:facet name="header">Apellidos</f:facet>
                         <h:outputText value="#{v.lastName}"/>
                     </h:column>
+                    
+                    <h:column>
+                        <f:facet name="header">Acciones</f:facet>
+                        <h:commandLink
+                            class="btn btn-info"
+                            value="Editar"
+                            action="#{nav.goEditVoter(v.dpi)}">
+                        </h:commandLink>
+                        <span> </span>
+                        <h:commandLink
+                            class="btn btn-danger"
+                            value="Eliminar"
+                            onclick="if(!confirm('¿Desea eliminar este votante?')) return false;">
+                            <f:ajax execute="@this" render="@form" listener="#{voterListBean.delete(v.dpi)}"/>
+                        </h:commandLink>
+                    </h:column>
                 </h:dataTable>
-                <h:commandLink 
-                    value="Registrar nuevo votante" 
+                
+                <h:commandLink
+                    value="Registrar nuevo votante"
                     class="btn btn-primary"
-                    action="register">                       
-                </h:commandLink>
+                    action="#{nav.goCreateVoters()}"/>
             </h:form>        
         </ui:define>
 

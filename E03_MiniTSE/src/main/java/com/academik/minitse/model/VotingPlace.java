@@ -44,7 +44,30 @@ public class VotingPlace implements Serializable {
     
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "votingPlace")
     private List<VotingTable> tables;
+    
+    @Column(name = "rango_mesa_inicial", nullable = false)
+    private String initialRange;
+    
+    @Column(name = "rango_mesa_final", nullable = false)
+    private String finalRange;
 
+    public String getInitialRange() {
+        return initialRange;
+    }
+
+    public void setInitialRange(String initialRange) {
+        this.initialRange = initialRange;
+    }
+
+    public String getFinalRange() {
+        return finalRange;
+    }
+
+    public void setFinalRange(String finalRange) {
+        this.finalRange = finalRange;
+    }
+
+    
     public Long getId() {
         return id;
     }
