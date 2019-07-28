@@ -10,28 +10,32 @@ import javax.transaction.Transactional;
 
 /**
  *
- * @author oscar
+ * @author esvux
  */
 @RequestScoped
 public class PoliticalPartyDAO {
-    
+
     @PersistenceContext(unitName = "MiniTSE_PU")
     EntityManager em;
+
+    @Transactional
+    public List<PoliticalParty> findAll() {
+        //JPQL
+        TypedQuery<PoliticalParty> query = em.createQuery(
+                "SELECT pp FROM PoliticalParty pp", 
+                PoliticalParty.class
+        );
+        List<PoliticalParty> result = query.getResultList();
+        return result;
+    }
+    
     
     @Transactional
     public void register(PoliticalParty newParty){
         em.persist(newParty);
     }
 
-    @Transactional
-    public List<PoliticalParty> findAll() {
-        TypedQuery<PoliticalParty> query = em.createQuery(
-        "SELECT pp FROM PoliticalParty pp", PoliticalParty.class
-        );
-        List<PoliticalParty> result = query.getResultList();
-        return result;
-    }
-    
+       
     @Transactional
     public PoliticalParty update(PoliticalParty party){
         PoliticalParty updated = em.merge(party);

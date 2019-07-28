@@ -1,31 +1,32 @@
 package com.academik.minitse.dao;
 
-import com.academik.minitse.model.Vote;
-import com.academik.minitse.model.Voter;
+
+import com.academik.minitse.model.VotingTable;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+
 /**
  *
  * @author oscar
  */
+
 @RequestScoped
-public class VoteDAO {
+public class VotingTableDAO {
+    
     @PersistenceContext(unitName = "MiniTSE_PU")
     EntityManager em;
     
-@Transactional    
-    public void register(Vote newVote){
-        em.persist(newVote);
-        
+    public VotingTable findByDpi(Long id){
+        VotingTable vt = em.find(VotingTable.class, id);
+        return vt;
     }
-    
+
     @Transactional
-    public Vote update (Vote vote){
-        Vote updated = em.merge(vote);
+    public VotingTable update(VotingTable votingTable){
+        VotingTable updated = em.merge(votingTable);
         return updated;
     }
-    
 }

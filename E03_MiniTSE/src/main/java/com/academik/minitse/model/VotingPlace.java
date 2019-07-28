@@ -46,24 +46,24 @@ public class VotingPlace implements Serializable {
     private List<VotingTable> tables;
     
     @Column(name = "rango_mesa_inicial", nullable = false)
-    private String initialRange;
+    private int initialRange;
     
     @Column(name = "rango_mesa_final", nullable = false)
-    private String finalRange;
+    private int finalRange;
 
-    public String getInitialRange() {
+    public int getInitialRange() {
         return initialRange;
     }
 
-    public void setInitialRange(String initialRange) {
+    public void setInitialRange(int initialRange) {
         this.initialRange = initialRange;
     }
 
-    public String getFinalRange() {
+    public int getFinalRange() {
         return finalRange;
     }
 
-    public void setFinalRange(String finalRange) {
+    public void setFinalRange(int finalRange) {
         this.finalRange = finalRange;
     }
 

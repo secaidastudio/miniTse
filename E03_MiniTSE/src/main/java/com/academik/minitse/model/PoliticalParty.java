@@ -21,21 +21,19 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "partido")
 public class PoliticalParty implements Serializable {
-    
+
     @Id
     @SequenceGenerator(name = "seq_political_party", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_political_party")
     @Column(name = "id_partido")
     private Long id;
-    
+
     @Column(name = "nombre")
     private String name;
-    
+
     @Column(name = "nombre_candidato")
     private String candidate;
-    
-    
-    
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "politicalParty")
     private List<Vote> votes;
 
@@ -70,5 +68,5 @@ public class PoliticalParty implements Serializable {
     public void setVotes(List<Vote> votes) {
         this.votes = votes;
     }
-    
+
 }

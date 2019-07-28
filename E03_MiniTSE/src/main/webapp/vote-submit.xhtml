@@ -7,30 +7,33 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition template="templates/main.xhtml">
-
-        <ui:define name="title">Registro de voto</ui:define>
-
+        <ui:define name="title">Bienvenidos a Mini TSE</ui:define>
+        
         <ui:define name="content">
             <h:form>
-                <h3>Nuevo voto</h3> 
-
-                <h:selectOneRadio layout="pageDirection">
-                    <f:selectItem itemValue="-2" itemLabel="voto NULO"/>
-                    <f:selectItem itemValue="-1" itemLabel="voto EN BLANCO"/>
+                <h:outputLabel value="DPI:"/>
+                <br/>
+                <h:inputText id="dpi" value="#{voteSubmitBean.tempDpi}"/>
+                <br/>
+                <br/>
+                <h:selectOneRadio value="#{voteSubmitBean.selectedVoteOption}" layout="pageDirection">
+                    <f:selectItem itemValue="-2" itemLabel="Voto NULO"/>
+                    <f:selectItem itemValue="-1" itemLabel="Voto EN BLANCO"/>
                     <f:selectItems 
-                        value="#{listPoliticalPartiesBean.allParties}"
-                        var="app"
-                        itemValue="#{app.id}"
-                        itemLabel="#{app.name}"
-                        >
-                        
-                    </f:selectItems>
+                        value="#{voteSubmitBean.parties}"
+                        var="aPP"
+                        itemValue="#{aPP.id}"
+                        itemLabel="#{aPP.name}"
+                        />
                 </h:selectOneRadio>
-
-                <h:commandButton value = "Votar" class="btn btn-primary"action = "#{voteSubmitBean}" />
-            </h:form> 
+                <h:commandButton 
+                    value="Votar" 
+                    class="btn btn-primary" 
+                    action="#{voteSubmitBean.vote()}"/>
+                
+            </h:form>
         </ui:define>
-
+        
     </ui:composition>
 
 </html>

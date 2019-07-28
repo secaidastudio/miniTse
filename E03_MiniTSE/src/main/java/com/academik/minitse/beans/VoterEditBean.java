@@ -30,6 +30,15 @@ public class VoterEditBean implements Serializable {
     private String tempGender;
     private String tempAddress;
     private String tempExtraAddress;
+    private int tempAssignedTable;
+
+    public int getTempAssignedTable() {
+        return tempAssignedTable;
+    }
+
+    public void setTempAssignedTable(int tempAssignedTable) {
+        this.tempAssignedTable = tempAssignedTable;
+    }
 
     @PostConstruct
     public void init() {
@@ -52,6 +61,7 @@ public class VoterEditBean implements Serializable {
         tempBirthday = voter.getBirthday();
         tempAddress = voter.getAddress();
         tempExtraAddress = voter.getExtraAddress();
+        tempAssignedTable = voter.getAssignedTable();
         
     }
 
@@ -119,6 +129,7 @@ public class VoterEditBean implements Serializable {
         voter.setBirthday(tempBirthday);
         voter.setAddress(tempAddress);
         voter.setExtraAddress(tempExtraAddress);
+        voter.setAssignedTable(tempAssignedTable);
         
         voter = daoVoter.update(voter);
     }

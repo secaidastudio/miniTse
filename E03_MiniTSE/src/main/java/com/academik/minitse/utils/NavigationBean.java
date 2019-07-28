@@ -39,6 +39,10 @@ public class NavigationBean {
         return immediateRedirect("voter-edit") + "&selected_id=" + id;
     }
     
+    public String goVoteSubmit() {
+        return immediateRedirect("vote-submit");
+    }
+    
     public String goEditParty(Long id){
         return immediateRedirect("party-edit")+"&selected_id="+ id;
     }

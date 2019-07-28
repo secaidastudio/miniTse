@@ -45,6 +45,10 @@
                     <!-- Dirección extra del votante -->
                     <h:outputText value="Complemento de dirección"/>
                     <h:inputText value="#{voterCreateBean.tempExtraAddress}" class="w-100"/>
+                    
+                    <!-- Asignando mesa -->
+                    <h:outputText value="Mesa asignada"/>
+                    <h:inputText value="#{voterCreateBean.tempAssignedTable}" class="w-50"/>
                 </h:panelGrid>
 
                 <h:commandButton 

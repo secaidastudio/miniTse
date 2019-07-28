@@ -38,6 +38,7 @@
                         <h:commandLink
                             class="btn btn-danger"
                             value="Eliminar"
+                            rendered="#{!v.voted}"
                             onclick="if(!confirm('¿Desea eliminar este votante?')) return false;">
                             <f:ajax execute="@this" render="@form" listener="#{voterListBean.delete(v.dpi)}"/>
                         </h:commandLink>

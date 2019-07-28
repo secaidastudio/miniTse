@@ -1,7 +1,11 @@
 package com.academik.minitse.beans;
 
 import com.academik.minitse.dao.VoterDAO;
+import com.academik.minitse.dao.VotingTableDAO;
 import com.academik.minitse.model.Voter;
+import static com.academik.minitse.model.Voter_.table;
+import com.academik.minitse.model.VotingPlace;
+import com.academik.minitse.model.VotingTable;
 import com.academik.minitse.utils.DateUtils;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,6 +26,9 @@ public class VoterCreateBean {
     @Inject
     VoterDAO dao;
     
+    @Inject
+    VotingTableDAO vtableDao;
+    
     @PersistenceContext(unitName = "MiniTSE_PU")
     EntityManager em;
     
@@ -32,6 +39,17 @@ public class VoterCreateBean {
     private String tempGender;
     private String tempAddress;
     private String tempExtraAddress;
+    private int tempAssignedTable;
+    
+    
+
+    public int getTempAssignedTable() {
+        return tempAssignedTable;
+    }
+
+    public void setTempAssignedTable(int tempAssignedTable) {
+        this.tempAssignedTable = tempAssignedTable;
+    }
     private boolean tempVoted;
 
     public boolean isTempVoted() {
@@ -102,10 +120,16 @@ public class VoterCreateBean {
         Voter voter = em.find(Voter.class, dpi);
         return voter;
     }
+   
+    //Obtener el ID de mesa basado en el DPI
+    
+   
     
         
     public String register(){
         Voter v = new Voter();
+        VotingTable mesa = vtableDao.findByDpi(Long.parseLong(tempDpi));
+        
         v.setDpi(tempDpi);    
         v.setFirstName(tempFirstName);
         v.setLastName(tempLastName);
@@ -114,6 +138,9 @@ public class VoterCreateBean {
         v.setAddress(tempAddress);
         v.setExtraAddress(tempExtraAddress);
         v.setVoted(tempVoted);
+        v.setAssignedTable(tempAssignedTable);
+        v.setTable(mesa);
+       
         dao.register(v);
         return "voters";
         

@@ -25,6 +25,24 @@ public class VotingPlaceEditBean implements Serializable {
     private String tempName;
     private String tempAddress;
     private String tempExtraAddress;
+    private Integer tempInitialRange;
+    private Integer tempFinalRange;
+
+    public Integer getTempInitialRange() {
+        return tempInitialRange;
+    }
+
+    public void setTempInitialRange(Integer tempInitialRange) {
+        this.tempInitialRange = tempInitialRange;
+    }
+
+    public Integer getTempFinalRange() {
+        return tempFinalRange;
+    }
+
+    public void setTempFinalRange(Integer tempFinalRange) {
+        this.tempFinalRange = tempFinalRange;
+    }
 
     @PostConstruct
     public void init() {
@@ -42,6 +60,8 @@ public class VotingPlaceEditBean implements Serializable {
         tempName = place.getName();
         tempAddress = place.getAddress();
         tempExtraAddress = place.getExtraAddress();
+        tempInitialRange = place.getInitialRange();
+        tempFinalRange = place.getFinalRange();
     }
 
     public String getTempName() {
@@ -72,6 +92,8 @@ public class VotingPlaceEditBean implements Serializable {
         place.setName(tempName);
         place.setAddress(tempAddress);
         place.setExtraAddress(tempExtraAddress);
+        place.setInitialRange(tempInitialRange);
+        place.setFinalRange(tempFinalRange);
         place = daoVotingPlace.update(place);
     }
 

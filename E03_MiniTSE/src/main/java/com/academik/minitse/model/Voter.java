@@ -48,6 +48,9 @@ public class Voter implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_mesa")
     private VotingTable table;
+    
+    @Column(name = "mesa_asignada")
+    private int assignedTable;
 
     public String getDpi() {
         return dpi;
@@ -119,6 +122,14 @@ public class Voter implements Serializable {
 
     public void setVoted(Boolean voted) {
         this.voted = voted;
+    }
+
+    public int getAssignedTable() {
+        return assignedTable;
+    }
+
+    public void setAssignedTable(int assignedTable) {
+        this.assignedTable = assignedTable;
     }
 
 }

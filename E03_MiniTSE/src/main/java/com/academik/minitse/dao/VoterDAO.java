@@ -52,4 +52,17 @@ public class VoterDAO {
         em.remove(voterToDelete);
     }
     
+    @Transactional
+    public List<Voter> findVoted(String id){
+        //JPQL
+        TypedQuery<Voter> query = em.createQuery(
+                "SELECT v.voted from Voter v WHERE v.dpi = :codigo",
+                Voter.class
+        );
+        query.setParameter("codigo", id);
+        List<Voter> result = query.getResultList();
+        return result;
+    }
+    
+    
 }
